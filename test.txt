@@ -1,0 +1,17 @@
+BLGA.KS.HGZ.sac    BLGA       IPU0      2023/07/29 10:07:59.000      8.3036      13.331   ISU0    
+CHOA.KS.HGZ.sac    CHOA       IPU0      2023/07/29 10:07:59.000     7.53812     11.9793   ISU0    
+DGHA.KS.HGZ.sac    DGHA       IPU0      2023/07/29 10:07:59.000     2.34784     3.18167   ISU0    
+DUSB.KS.HHZ.sac    DUSB       IPU0      2023/07/29 10:07:59.000     5.30636     8.28699   ISU0    
+HAMB.KS.HHZ.sac    HAMB       IPU0      2023/07/29 10:07:59.000     7.56911     12.0591   ISU0    
+IMSB.KS.HHZ.sac    IMSB       IPU0      2023/07/29 10:07:59.000      6.3379      9.9408   ISU0    
+JASA.KS.HGZ.sac    JASA       IPU0      2023/07/29 10:07:59.000     4.10664      6.2605   ISU0    
+JEU2.KS.ELZ.sac    JEU2       IPU0      2023/07/29 10:07:59.000      11.952     19.3162   ISU0    
+JGNA.KS.HGZ.sac    JGNA       IPU0      2023/07/29 10:07:59.000     9.13671     14.7288   ISU0    
+KCH2.KS.ELZ.sac    KCH2       IPU0      2023/07/29 10:07:59.000     8.14512     12.9195   ISU0    
+KMSB.KS.HHZ.sac    KMSB       IPU0      2023/07/29 10:07:59.000     6.86961     10.8795   ISU0    
+LIWA.KS.HGZ.sac    LIWA       IPU0      2023/07/29 10:07:59.000     9.53067     15.3791   ISU0    
+MALA.KS.HGZ.sac    MALA       IPU0      2023/07/29 10:07:59.000     4.22815     6.50358   ISU0    
+NAWB.KS.HHZ.sac    NAWB       IPU0      2023/07/29 10:07:59.000     8.54959     13.6061   ISU0    
+WAJB.KS.HHZ.sac    WAJB       IPU0      2023/07/29 10:07:59.000     5.60669     8.69679   ISU0    
+WICA.KS.HGZ.sac    WICA       IPU0      2023/07/29 10:07:59.000     5.60107     8.68555   ISU0    
+YDGA.KS.HGZ.sac    YDGA       IPU0      2023/07/29 10:07:59.000      7.9272     12.5763   ISU0    
