@@ -27,6 +27,6 @@ SAC > ppk a p 3 m on
 ```
 3) Hypoellipse를 이용한 진원 계산
 ```bash
-~/home/hypoellipse/hypoel/Hypoel < ~/home/jangsu/location/input_file/hypo.in
+~/hypoellipse/hypoel/Hypoel < ~/jangsu/location/input_file/hypo.in
 ```
 
