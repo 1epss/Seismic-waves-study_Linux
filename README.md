@@ -30,3 +30,21 @@ SAC > ppk a p 3 m on
 ~/hypoellipse/hypoel/Hypoel < ~/jangsu/location/input_file/hypo.in
 ```
 
+## Setting up environment with Nix
+
+You need to have [Nix](https://nixos.org/download) installed, with [flakes enabled](https://nixos.wiki/wiki/Flakes#Other_Distros:_Without_Home-Manager).
+
+In the repo directory, run
+```sh
+nix develop
+```
+and you will get a shell with all tools needed to compile `Hypoel` and run Python.
+
+### Getting `nix develop` to automatically run
+
+Get [direnv](https://direnv.net/docs/installation.html). It should ask you to enable the `.envrc` configuration
+when you are in this folder.
+To activate it, run
+```sh
+direnv allow
+```
