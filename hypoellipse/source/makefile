@@ -1,5 +1,5 @@
 # For solaris use the following lines:
-FC= gfortran -C -O
+FC= f77 -C -O -static --std=legacy
 CC= cc -O
 CLIBS = -lsocket -lnsl
 
@@ -122,4 +122,4 @@ y2ksta: $(Y2KSTA)
 	$(FC) $(Y2KSTA) -o y2ksta
 
 clean:
-	/bin/rm *.o Hypoel Hypoel_xpick
+	rm -f *.o Hypoel Hypoel_xpick
