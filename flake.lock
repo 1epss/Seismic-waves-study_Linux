@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "mseed2sac": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1573244272,
+        "narHash": "sha256-an64n1/GmbvkJuxRWU9XLNuyig253IDCS7ITrWoZa/8=",
+        "owner": "iris-edu",
+        "repo": "mseed2sac",
+        "rev": "356fe94244189a2bd45bcb32e6e8950debc9b82a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "iris-edu",
+        "ref": "v2.3",
+        "repo": "mseed2sac",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1693985761,
@@ -18,6 +35,7 @@
     },
     "root": {
       "inputs": {
+        "mseed2sac": "mseed2sac",
         "nixpkgs": "nixpkgs"
       }
     }

@@ -1,6 +1,9 @@
 {
   inputs.nixpkgs.url = github:nixOS/nixpkgs/nixos-unstable;
 
+  inputs.mseed2sac.url = github:iris-edu/mseed2sac/v2.3;
+  inputs.mseed2sac.flake = false;
+
   outputs = { self, nixpkgs, ... } @ inputs:
     let
       system = "x86_64-linux";
@@ -18,12 +21,24 @@
           cp Hypoel $out/bin/hypoel
         '';
       };
+
+      mseed2sac = pkgs.stdenv.mkDerivation {
+        pname = "mseed2sac";
+        version = "2.3";
+        src = inputs.mseed2sac;
+        nativeBuildInputs = with pkgs; [ zlib ];
+        installPhase = ''
+          mkdir -p $out/bin
+          cp mseed2sac $out/bin/mseed2sac
+        '';
+      };
     in
     with lib; {
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
           # List packages needed here
           hypoel
+          mseed2sac
           ## For compiling hypoellipse
           gfortran
           gnumake
