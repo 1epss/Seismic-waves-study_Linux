@@ -29,6 +29,9 @@
           gnumake
           glibc.static
 
+          # For scripts I guess
+          fish
+
           # You need chromedriver?
           chromedriver
 
