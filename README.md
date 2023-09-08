@@ -3,20 +3,24 @@
 analyzing seismic waves with Seismic Analysis Code (SAC) &amp; Hypoellipse on Ubuntu
 
 
-## 개요
+## Overview
 
-Windows - Cygwin 환경에서 [SAC](https://ds.iris.edu/ds/nodes/dmc/software/downloads/SAC/102-0/)과 [Hypoellipse](https://pubs.usgs.gov/of/1999/ofr-99-0023/)를 이용한 지진파 분석을 Linux (Ubuntu 23.04) - GNOME-shell 44.3 환경에서 동일하게 실행하기 위한 코드입니다.
+A repository to analyze seismic waves with [SAC](https://ds.iris.edu/ds/nodes/dmc/software/downloads/SAC/102-0/) and [Hypoellipse](https://pubs.usgs.gov/of/1999/ofr-99-0023/) in Linux (Ubuntu 23.04).
 
 
-## 과정
+## Getting Started
 
-1) NECIS에서 수집한 MSEED 데이터 전처리 및 [MSEED2SAC](https://github.com/iris-edu/mseed2sac)을 이용한 SAC 변환
+1) Convert miniseed data to SAC format with [MSEED2SAC](https://github.com/iris-edu/mseed2sac)
+
 ```bash
 mseed2sac [options] file1 [file2 file3 ...]
 ```
 
-2) SAC을 이용한 지진 파형 분석 및 자료 처리
+2) Preprocess and analyze seismic waves with SAC
+
 ```
+# picking body waves
+
 sac
 
 SAC > r *.sac
@@ -25,9 +29,32 @@ SAC > fileid loc ul type list kstnm kcmpnm dist az
 SAC > sort dist
 SAC > ppk a p 3 m on
 ```
-3) Hypoellipse를 이용한 진원 계산
+
+3) Make Hypo.phase and Station.sta with picked seismic waves
+   
+   You can run [`config.ipynb`](jangsu_practice/config.ipynb) with simple modification on code.
+   
+```python3
+...
+file = os.listdir('direction of your seismic waves folder')
+array = list(filter(lambda x: re.match('.*Z.sac$', x), file))
+array.sort(key=lambda x : len(x))
+...
+
+with open('hypo.phase', 'a') as f:
+    for i in unit_array:
+        st = obspy.read('../direction of your seismic waves folder/' + i)
+...
+...
+```
+
+
+
+4) Calculate depth of an earthquake and visualize the location of each station with Hypoellipse
+
 ```bash
-~/hypoellipse/hypoel/Hypoel < ~/jangsu/location/input_file/hypo.in
+cd jangsu2/location
+../../hypoellipse/hypoel/Hypoel < input_file/hypo.in
 ```
 
 ## Setting up environment with Nix
@@ -39,6 +66,7 @@ In the repo directory, run
 nix develop
 ```
 and you will get a shell with all tools needed to compile `Hypoel` and run Python.
+
 
 ### Getting `nix develop` to automatically run
 
