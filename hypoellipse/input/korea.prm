@@ -1,0 +1,29 @@
+! Model 1: kim et al (2011)
+VELOCITY 1      1  5.63       0.0      1.66
+VELOCITY 1      2  6.17      7.29      1.71
+VELOCITY 1      3  6.58      20.7      1.78
+VELOCITY 1      4  7.77      31.3      1.75
+
+! Model 2: Chang & Baag (2006)
+VELOCITY 2      1  5.67       0.0      1.73
+VELOCITY 2      2  6.05       5.1      1.73
+VELOCITY 2      3  6.67      16.7      1.73
+VELOCITY 2      4  7.88      31.9      1.78
+
+! Model 3: Kim (1995)
+VELOCITY 3      1  5.56       0.0      1.97
+VELOCITY 3      2  6.00       2.6      1.79
+VELOCITY 3      3  6.95      15.5      1.66
+VELOCITY 3      4  7.76      32.8      1.68
+
+! Model 4: Kim & Chung (1985)
+VELOCITY 4      1  5.5        0.0      1.67
+VELOCITY 4      2  6.0        2.0      1.71
+VELOCITY 4      3  6.6       15.0      1.78
+VELOCITY 4      4  7.7       29.0      1.79
+
+! Model 5: Kim & Kim (1983)
+VELOCITY 5      1  5.98       0.0      1.76
+VELOCITY 5      2  6.38      15.0      1.68
+VELOCITY 5      3  7.95      32.0      1.74
+
