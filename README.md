@@ -32,20 +32,12 @@ SAC > ppk a p 3 m on
 
 3) Make Hypo.phase and Station.sta with picked seismic waves
    
-   You can run [`config.ipynb`](jangsu_practice/config.ipynb) with simple modification on code.
+   You can run this block in [`config.ipynb`](jangsu_practice/config.ipynb).
+   It will make `hypo.phase` and `station.sta` for the next step.
    
 ```python3
-...
-file = os.listdir('direction of your seismic waves folder')
-array = list(filter(lambda x: re.match('.*Z.sac$', x), file))
-array.sort(key=lambda x : len(x))
-...
-
-with open('hypo.phase', 'a') as f:
-    for i in unit_array:
-        st = obspy.read('../direction of your seismic waves folder/' + i)
-...
-...
+make_hypo('hypo.phase', '../jangsu/dist100_station/')
+make_station('station.sta', '../jangsu/dist100_station/')
 ```
 
 
