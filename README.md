@@ -49,6 +49,12 @@ cd jangsu2/location
 ../../hypoellipse/hypoel/Hypoel < input_file/hypo.in
 ```
 
+### KR_earthquake_station
+
+A directory for collecting data of station with [Selenium](https://www.selenium.dev/documentation/webdriver/).
+By running [`korea_instrument.ipynb`](KR_earthquake_station/korea_instrument.ipynb), you can get preprocessed station data from [NECIS](https://necis.kma.go.kr/necis-dbf/user/common/userLoginNewForm.do) but it requires sign up process.
+
+
 ## Setting up environment with Nix
 
 You need to have [Nix](https://nixos.org/download) installed, with [flakes enabled](https://nixos.wiki/wiki/Flakes#Other_Distros:_Without_Home-Manager).
