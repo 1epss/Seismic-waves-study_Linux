@@ -49,6 +49,7 @@
 
           # You need chromedriver?
           chromedriver
+          chromium
 
           ## For running the jupyter notebook
           (python3.withPackages (p: with p; [
