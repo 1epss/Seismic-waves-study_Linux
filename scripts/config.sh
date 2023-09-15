@@ -12,9 +12,19 @@ while read filename station channel ka evdate evtime ptime stime swave; do
 cat data_dist100.txt | awk '{ print length($2), $0; }' | sort -n | while read len filename station channel pwave evdate evtime ptime stime swave b; do
 	for key in ${!dict[@]}; do value=${dict[${key}]}
 		if [[ ${station} == ${key} && ${channel} == ${value} ]]; then
-			date -d '$evdate' +%s
-			echo $evdate
-			#printf '%-4s%-4s%16s%12s%-4s\n' $station $pwave $mod_ptime $mod_stime $swave >> hypo2.phase
+			timestamp=`date -d "$evdate $evtime" "+%s"`
+			if [[ $b =~ [a-z]\-[0-9][0-9]$ ]]; then 
+				eee=${b%%e*}; fff=${b: -2}; b=`echo "scale=10; $eee*((1/10)^$fff)" | bc`; fi
+			org_timestamp=`echo $timestamp - $b | bc -l`
+			p_timestamp=`echo $org_timestamp + $ptime | bc -l`
+			s_timestamp=`echo $org_timestamp + $stime | bc -l`
+			pstime=`echo $s_timestamp - $p_timestamp | bc -l`
+			p_utc=`date -d @$p_timestamp`
+			mod_ptime=`date -d @$p_timestamp +'%y%m%d%H%M%S.%3N' | bc -l | awk '{printf "%.2f\n", $0}'`
+			org_stime=`date -d @$p_timestamp +'%S.%N'`
+			mod_stime=`echo $org_stime + $pstime | bc -l | awk '{printf "%.2f", $0}'`
+			if [[ $mod_stime =~ ^[0-9]\. ]]; then mod_stime=0$mod_stime; fi
+			printf '%-4s%-4s%16s%12s%-4s\n' $station $pwave $mod_ptime $mod_stime $swave >> hypo.phase
 		else continue; fi; done; done
 		
 
