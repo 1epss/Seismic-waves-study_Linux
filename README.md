@@ -32,20 +32,9 @@ SAC > ppk a p 3 m on
 
 3) Make Hypo.phase and Station.sta with picked seismic waves
    
-   You can go through the next step by running [`config.ipynb`](scripts/config.ipynb) or [`config.sh`](scripts/config.sh).
+   You can go through the next step by running [`make_hypo.py`](scripts/make_hypo.py) and [`make_station.py`](scripts/make_station.py), or [`config.sh`](scripts/config.sh).
    It will automatically make `hypo.phase` and `station.sta` from your analyzed seismic data.
 
-In config.ipynb,  
-```python3
-make_hypo('hypo.phase', '../jangsu/dist100_station/')
-make_station('station.sta', '../jangsu/dist100_station/')
-```
-
-In bash terminal,  
-```bash
-cd scripts
-./config.sh
-```
 
 4) Calculate depth of an earthquake and visualize the location of each station with Hypoellipse
 
