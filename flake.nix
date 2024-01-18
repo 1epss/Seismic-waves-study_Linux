@@ -191,22 +191,7 @@
             obspy
             pandas
             numpy
-            (
-              # From https://discourse.nixos.org/t/how-to-fix-selenium-python-package-locally/23660/4
-              p.selenium.overridePythonAttrs
-                (old: {
-                  src = pkgs.fetchFromGitHub {
-                    owner = "SeleniumHQ";
-                    repo = "selenium";
-                    rev = "refs/tags/selenium-4.8.0";
-                    hash = "sha256-YTi6SNtTWuEPlQ3PTeis9osvtnWmZ7SRQbne9fefdco=";
-                  };
-                  postInstall = ''
-                    install -Dm 755 ../rb/lib/selenium/webdriver/atoms/getAttribute.js $out/${pkgs.python3Packages.python.sitePackages}/selenium/webdriver/remote/getAttribute.js
-                    install -Dm 755 ../rb/lib/selenium/webdriver/atoms/isDisplayed.js $out/${pkgs.python3Packages.python.sitePackages}/selenium/webdriver/remote/isDisplayed.js
-                  '';
-                })
-            )
+            selenium
             beautifulsoup4
             requests
 
