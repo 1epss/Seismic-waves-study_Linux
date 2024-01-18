@@ -48,8 +48,24 @@
               install -Dm 755 ../rb/lib/selenium/webdriver/atoms/isDisplayed.js $out/${pkgs.python3Packages.python.sitePackages}/selenium/webdriver/remote/isDisplayed.js
             '';
           });
+
+          noisepy-seis = final.buildPythonPackage rec {
+            pname = "noisepy_seis";
+            version = "0.9.84";
+            format = "pyproject";
+            src = pkgs.fetchPypi {
+              inherit pname version;
+              hash = "sha256-CYE+SMm6U0MD3zHvrL3/Dmyjg2FNARgqnNzrhIUhEYw=";
+            };
+            doCheck = false;
+            propagatedBuildInputs = [
+              final.hatchling
+              final.hatch-vcs
+            ];
+          };
         };
       };
+
     in
     with lib; {
       devShells.${system}.default = pkgs.mkShell {
@@ -81,6 +97,8 @@
             selenium
             beautifulsoup4
             requests
+
+            noisepy-seis
           ]))
         ];
       };
