@@ -34,33 +34,123 @@
       };
 
       python3 = pkgs.python3.override {
-        packageOverrides = prev: final: {
-          # From https://discourse.nixos.org/t/how-to-fix-selenium-python-package-locally/23660/4
-          selenium = final.selenium.overridePythonAttrs (old: {
-            src = pkgs.fetchFromGitHub {
-              owner = "SeleniumHQ";
-              repo = "selenium";
-              rev = "refs/tags/selenium-4.8.0";
-              hash = "sha256-YTi6SNtTWuEPlQ3PTeis9osvtnWmZ7SRQbne9fefdco=";
-            };
-            postInstall = ''
-              install -Dm 755 ../rb/lib/selenium/webdriver/atoms/getAttribute.js $out/${pkgs.python3Packages.python.sitePackages}/selenium/webdriver/remote/getAttribute.js
-              install -Dm 755 ../rb/lib/selenium/webdriver/atoms/isDisplayed.js $out/${pkgs.python3Packages.python.sitePackages}/selenium/webdriver/remote/isDisplayed.js
-            '';
-          });
-
+        packageOverrides = final: prev: {
           noisepy-seis = final.buildPythonPackage rec {
             pname = "noisepy_seis";
             version = "0.9.84";
             format = "pyproject";
+            pythonRelaxDeps = true;
+            pythonRemoveDeps = [ "pycwt" ];
             src = pkgs.fetchPypi {
               inherit pname version;
               hash = "sha256-CYE+SMm6U0MD3zHvrL3/Dmyjg2FNARgqnNzrhIUhEYw=";
             };
             doCheck = false;
-            propagatedBuildInputs = [
-              final.hatchling
-              final.hatch-vcs
+            nativeBuildInputs = with final; [
+              hatchling
+              hatch-vcs
+              pythonRelaxDepsHook
+            ];
+            propagatedBuildInputs = with final; [
+              aiobotocore
+              datetimerange
+              diskcache
+              fsspec
+              h5py
+              numba
+              numpy
+              pandas
+              psutil
+              pyasdf
+              pycwt
+              pydantic-yaml
+              pydantic
+              pyyaml
+              s3fs
+              zarr
+            ];
+          };
+
+          datetimerange = final.buildPythonPackage rec {
+            pname = "DateTimeRange";
+            version = "2.2.0";
+            format = "pyproject";
+            src = pkgs.fetchPypi {
+              inherit pname version;
+              hash = "sha256-Bx6dyJxuRMNEzSUaF4kQ+wXI30I9HGvTNX4ylv57LZc=";
+            };
+            doCheck = false;
+            propagatedBuildInputs = with final; [
+              setuptools
+              setuptools-scm
+
+              dateutils
+              typepy
+            ];
+          };
+
+          pycwt = final.buildPythonPackage rec {
+            pname = "pycwt";
+            version = "0.3.0a22";
+            format = "pyproject";
+            src = pkgs.fetchPypi {
+              inherit pname version;
+              hash = "sha256-+ZZo7yyvjVAg72vLvMhu5ULQOK58Xh6A2hLlJkRF6xc=";
+            };
+            doCheck = false;
+            nativeBuildInputs = with final; [
+              setuptools
+              setuptools-scm
+            ];
+            propagatedBuildInputs = with final; [
+              numpy
+              scipy
+              matplotlib
+              tqdm
+            ];
+          };
+
+          pydantic-yaml = final.buildPythonPackage rec {
+            pname = "pydantic_yaml";
+            version = "1.2.0";
+            format = "pyproject";
+            src = pkgs.fetchPypi {
+              inherit pname version;
+              hash = "sha256-VL2vTaJbypW7m6eQsaXGtLPpP3zyGPzeRrMHO2F3n4E=";
+            };
+            pythonRelaxDeps = true;
+            doCheck = false;
+            nativeBuildInputs = with final; [
+              setuptools
+              setuptools-scm
+              importlib-metadata
+              pythonRelaxDepsHook
+            ];
+            propagatedBuildInputs = with final; [
+              pydantic
+              ruamel-yaml
+            ];
+          };
+
+          pyasdf = final.buildPythonPackage rec {
+            pname = "pyasdf";
+            version = "0.8.1";
+            format = "pyproject";
+            src = pkgs.fetchPypi {
+              inherit pname version;
+              hash = "sha256-O5/2AB72PsS6x30/a2E/PYKagNVsiE9Zs1rq3dnk3BI=";
+            };
+            doCheck = false;
+            propagatedBuildInputs = with final; [
+              setuptools
+              setuptools-scm
+
+              colorama
+              dill
+              h5py
+              numpy
+              obspy
+              prov
             ];
           };
         };
@@ -68,8 +158,15 @@
 
     in
     with lib; {
+      packages.${system} = {
+        python3 = python3;
+        pythonWith = pkgs.writeShellScriptBin "pythonWith" ''
+          nix-shell -p "(builtins.getFlake \"${self}\").packages.${system}.python3.withPackages (p: with p; [$@])" --run "code"
+        '';
+      };
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
+          self.packages.${system}.pythonWith
           # List packages needed here
           hypoel
           mseed2sac
