@@ -158,8 +158,15 @@
 
     in
     with lib; {
+      packages.${system} = {
+        python3 = python3;
+        pythonWith = pkgs.writeShellScriptBin "pythonWith" ''
+          nix-shell -p "(builtins.getFlake \"${self}\").packages.${system}.python3.withPackages (p: with p; [$@])" --run "code"
+        '';
+      };
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
+          self.packages.${system}.pythonWith
           # List packages needed here
           hypoel
           mseed2sac
